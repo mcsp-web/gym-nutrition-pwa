@@ -11,7 +11,8 @@ const MEMBER_LIMIT = Number(Deno.env.get('AI_DAILY_LIMIT_PER_MEMBER') ?? 3);
 const GLOBAL_LIMIT = Number(Deno.env.get('AI_DAILY_LIMIT_GLOBAL') ?? 100);
 const MODEL = Deno.env.get('ANTHROPIC_MODEL');
 const API_KEY = Deno.env.get('ANTHROPIC_API_KEY');
-const MAX_TOKENS = 1200;
+// Covers adaptive thinking + a full day's JSON plan. At Haiku pricing this is a fraction of a cent per plan.
+const MAX_TOKENS = 3000;
 
 const cors = {
   'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
