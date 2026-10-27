@@ -1,0 +1,20 @@
+{
+  "name": "fitcode-nutrition-demo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Pilot demo of the FitCode member nutrition app (Supabase + Vercel PWA). Built by MCSP Consulting. Not an official FitCode app.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "vite-plugin-pwa": "^0.20.0"
+  }
+}
