@@ -44,7 +44,10 @@ function header() {
   return `
     <header class="top">
       <div class="wordmark">FitCode <span>Nutrition</span><small>Pilot demo</small></div>
-      ${user ? `<span class="chip ${user.role === 'admin' ? 'admin' : ''}">${user.role === 'admin' ? 'Admin' : esc(user.full_name || user.email)}</span>` : ''}
+      <div class="top-right">
+        ${user ? `<span class="chip ${user.role === 'admin' ? 'admin' : ''}">${user.role === 'admin' ? 'Admin' : esc(user.full_name || user.email)}</span>` : ''}
+        <a class="help-link" href="#/help" aria-label="Help and how it works">?</a>
+      </div>
     </header>
     ${api.mode === 'mock' ? '<div class="banner">Demo mode: test data stays in this browser. The live version runs on Supabase with row-level security.</div>' : ''}`;
 }
@@ -371,6 +374,51 @@ async function viewAccount() {
   $('#reset')?.addEventListener('click', () => { api.demo.reset(); user = null; location.hash = '#/login'; toast('Demo data reset.'); });
 }
 
+// ---------- help ----------
+function viewHelp() {
+  const isMock = api.mode === 'mock';
+  const limit = 3;
+  const qa = (title, body, open = false) => `<details class="help-item" ${open ? 'open' : ''}><summary>${title}</summary><div class="help-body">${body}</div></details>`;
+  const body = `
+    <h1>Help</h1>
+    <p class="muted" style="margin-top:-4px">How the app works, in under two minutes.</p>
+    ${isMock ? '<div class="card"><h2>About this demo</h2><p class="small" style="margin:0">This is a preview with test accounts. Anything you enter stays in this browser only. In the live version, accounts and data are stored securely on the server, and meal plans are written by Claude AI.</p></div>' : ''}
+    <section class="card help">
+      ${qa('1. Getting started', `<ol>
+        <li>Sign in, or tap <b>Create account</b> with your email and a password (8+ characters).</li>
+        <li>Open <b>Plan</b> and enter your daily targets: calories, protein, carbs and fat. Your coach can give you these numbers.</li>
+        <li>Log what you eat on <b>Log</b>, and check your progress on <b>Today</b>.</li></ol>`, true)}
+      ${qa('2. Logging a meal', `<p>Enter the food, then choose how you measured it:</p>
+        <ul><li><b>Ounces</b> if you weighed it.</li>
+        <li><b>Hand portions</b> if you eyeballed it: a <b>palm</b> of protein, a <b>fist</b> of vegetables, a <b>cupped hand</b> of carbs, a <b>thumb</b> of fats.</li></ul>
+        <p>Add the protein, carbs and fat grams if you know them. Made a mistake? Tap <b>Delete</b> next to the meal in today's list.</p>`)}
+      ${qa('3. The Today screen', `<ul><li>Bars show what you've eaten today against your targets. A bar turns amber when you go more than 5% over.</li>
+        <li><b>7-day protein avg</b> averages the days you logged in the past week.</li>
+        <li><b>Daily check-in</b> saves your weight and water. Saving again the same day updates it.</li></ul>
+        <p>Days run on Chicago time, so the day turns over at midnight Central.</p>`)}
+      ${qa('4. AI meal plans', `<ul><li>On <b>Plan</b>, tap <b>Generate meal plan</b> for one day of meals built around your targets.</li>
+        <li>Add preferences such as foods you avoid or when you train, and the plan follows them.</li>
+        <li>Each member gets <b>${limit} plans per day</b>. The dots show how many you have left; they reset at midnight Chicago time.</li>
+        <li>Plans are written on the server, so no AI keys or account details ever sit on your phone.</li></ul>
+        <p class="small muted">Meal plans are general guidance, not medical advice. Check with your coach or doctor about allergies or health conditions.</p>`)}
+      ${qa('5. Install it on your phone', `<p><b>iPhone</b></p>
+        <ol><li>Open the site in <b>Safari</b>.</li><li>Tap the <b>Share</b> button (square with an arrow).</li><li>Scroll down and tap <b>Add to Home Screen</b>, then <b>Add</b>.</li></ol>
+        <p><b>Android</b></p>
+        <ol><li>Open the site in <b>Chrome</b>.</li><li>Tap <b>Install app</b> when it pops up, or open the <b>⋮</b> menu and choose <b>Install app</b> (or <b>Add to Home screen</b>).</li></ol>
+        <p>It then opens full screen from its own icon, like a regular app.</p>`)}
+      ${qa('6. Your data and privacy', `<ul><li>Only you can see your meals, weight and plans. The database itself blocks other members from reading them, not just the app screens.</li>
+        <li>Gym staff with an admin account can view member summaries to support your coaching.</li>
+        <li>Members can't change their own access level.</li>
+        <li>Want to check? <b>Account → Security checks</b> runs both tests live.</li></ul>`)}
+      ${qa('7. For coaches (admin accounts)', `<p>Admins get a <b>Members</b> tab: each member's days since last log, current logging streak, 7-day protein average against target, and latest weight. It's read-only.</p>`)}
+      ${qa('8. Something not working?', `<ul><li><b>App looks out of date:</b> close it fully and reopen it once or twice to load the latest version.</li>
+        <li><b>Forgot password:</b> tap <b>Forgot password?</b> on the sign-in screen for a reset link.</li>
+        <li><b>"Limit reached":</b> you've used today's ${limit} meal plans; more are available after midnight Chicago time.</li></ul>`)}
+    </section>
+    <a class="btn ghost" href="${user ? '#/today' : '#/login'}">${user ? 'Back to Today' : 'Back to sign in'}</a>`;
+  if (user) page('help', body); else authPage(body);
+}
+
 // ---------- router ----------
 const PUBLIC = { login: viewLogin, signup: viewSignup, reset: viewReset, 'new-password': viewNewPassword };
 const PRIVATE = { today: viewToday, log: viewLog, plan: viewPlan, members: viewMembers, account: viewAccount };
@@ -378,6 +426,7 @@ const PRIVATE = { today: viewToday, log: viewLog, plan: viewPlan, members: viewM
 async function route() {
   const key = (location.hash.replace(/^#\/?/, '') || 'today').split('?')[0];
   try {
+    if (key === 'help') return viewHelp();
     if (PUBLIC[key]) {
       if (user && key !== 'new-password') { location.hash = '#/today'; return; }
       return PUBLIC[key]();
