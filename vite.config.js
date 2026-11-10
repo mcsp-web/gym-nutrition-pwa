@@ -7,9 +7,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icons/apple-touch-icon.png', 'icons/favicon-32.png'],
       manifest: {
-        name: 'FitCode Nutrition (demo)',
-        short_name: 'FitCode Demo',
-        description: 'Pilot demo of a member nutrition app. Built by MCSP Consulting — not an official FitCode app.',
+        name: 'Gym Nutrition (demo)',
+        short_name: 'Gym Nutrition',
+        description: 'Pilot demo of a member nutrition app for gyms. Built by MCSP Consulting.',
         start_url: '/',
         scope: '/',
         display: 'standalone',

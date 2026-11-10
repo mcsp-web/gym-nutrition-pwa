@@ -43,7 +43,7 @@ const ICONS = {
 function header() {
   return `
     <header class="top">
-      <div class="wordmark">FitCode <span>Nutrition</span><small>Pilot demo</small></div>
+      <div class="wordmark">Gym <span>Nutrition</span><small>Pilot demo</small></div>
       <div class="top-right">
         ${user ? `<span class="chip ${user.role === 'admin' ? 'admin' : ''}">${user.role === 'admin' ? 'Admin' : esc(user.full_name || user.email)}</span>` : ''}
         <a class="help-link" href="#/help" aria-label="Help and how it works">?</a>
@@ -52,7 +52,7 @@ function header() {
     ${api.mode === 'mock' ? '<div class="banner">Demo mode: test data stays in this browser. The live version runs on Supabase with row-level security.</div>' : ''}`;
 }
 
-const footer = () => `<p class="footer">Demo built by MCSP Consulting for FitCode — not an official FitCode app.</p>`;
+const footer = () => `<p class="footer">Demo built by MCSP Consulting. Sample data only.</p>`;
 
 function tabbar(active) {
   const tabs = [['today', 'Today'], ['log', 'Log'], ['plan', 'Plan']];

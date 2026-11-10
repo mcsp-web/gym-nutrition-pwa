@@ -7,7 +7,7 @@ import { todayLocal, addDays } from '../lib/dates.js';
 import { buildMemberSummary } from '../lib/summary.js';
 import { mockMealPlan } from '../lib/mockPlan.js';
 
-const KEY = 'fitcode-demo-db-v1';
+const KEY = 'gym-nutrition-demo-db-v1';
 export const DEMO_PASSWORD = 'demo1234';
 export const AI_DAILY_LIMIT = 3;
 

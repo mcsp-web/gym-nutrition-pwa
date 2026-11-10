@@ -1,8 +1,18 @@
-# FitCode Nutrition — pilot demo
+# Gym Nutrition: installable nutrition app for gym members (PWA)
 
-Installable web app (PWA) for gym members: macro targets, meal logging by ounces or hand portions, daily weight/water, and a server-side AI meal plan capped at 3 per member per day. Admins get a read-only member summary.
+Members set macro targets, log meals by ounces or hand portions, check in weight and water daily, and get a server-side AI meal plan capped at 3 per member per day. Coaches get a read-only member summary.
 
-> Demo built by MCSP Consulting for FitCode — not an official FitCode app. No real member data.
+> Demo built by MCSP Consulting. Sample data only.
+
+| Today vs. target | AI meal plan | Log a meal | Live security checks | Coach view | Sign in |
+|---|---|---|---|---|---|
+| ![](docs/screenshots/01-dashboard.webp) | ![](docs/screenshots/02-plan.webp) | ![](docs/screenshots/03-log.webp) | ![](docs/screenshots/04-security.webp) | ![](docs/screenshots/05-coach-members.webp) | ![](docs/screenshots/06-signin.webp) |
+
+**Front end:** Vite + vanilla JS (22 KB, 7.5 KB gzipped, not counting the lazily loaded Supabase client), hand-written CSS, service worker and manifest via `vite-plugin-pwa`, iPhone safe-area padding, checked at 320 px wide.
+
+**Back end:** Supabase Postgres with row-level security, and a Deno Edge Function that calls Claude.
+
+**Tests:** `npm test` runs 10 rule checks (data isolation, no self-promotion, the 3-a-day AI cap, Chicago-time day boundaries, summary math). All pass.
 
 ## Two modes
 

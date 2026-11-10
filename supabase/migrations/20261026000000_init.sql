@@ -1,4 +1,4 @@
--- FitCode Nutrition demo — initial schema, RLS, AI usage cap, summary view.
+-- Gym Nutrition demo — initial schema, RLS, AI usage cap, summary view.
 -- Apply with: supabase db push   (or paste into the Supabase SQL editor once)
 
 -- ============================================================

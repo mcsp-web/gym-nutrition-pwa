@@ -1,6 +1,6 @@
-# PR: FitCode Nutrition demo — front end, PWA, mock backend, Supabase files
+# PR: Gym Nutrition demo — front end, PWA, mock backend, Supabase files
 
-**Branch:** `main` (initial commit `d6aa4b2`) · **Repo:** `fitcode-nutrition-demo` · **Status:** ready to deploy in mock mode; Supabase steps pending (needs a computer)
+**Branch:** `main` (initial commit `d6aa4b2`) · **Repo:** `gym-nutrition-pwa` · **Status:** ready to deploy in mock mode; Supabase steps pending (needs a computer)
 
 ## Summary
 
@@ -15,9 +15,9 @@ Builds the full demo app from spec v2 so it can go live tonight without Supabase
 - **Plan:** macro targets form, AI meal plan with "N of 3 left today" counter; button locks at the limit
 - **Members (admin only):** read-only table with the same columns as `member_summary`
 - **Account:** edit name, sign out, and two live **Security checks** — "read other members' meals" (members get 0 rows) and "make myself admin" (blocked)
-- Footer on every page: "Demo built by MCSP Consulting for FitCode — not an official FitCode app."
+- Footer on every page: "Demo built by MCSP Consulting. Sample data only."
 
-**Look:** dark gym style using FitCode's own reds sampled from their site (CTA red #BC141C, highlight #E31B23), Roboto / Roboto Condensed. Plain text wordmark and an original "FN" icon — no FitCode logo or photos, per the spec's ground rules.
+**Look:** dark gym style with a red accent (CTA red #BC141C, highlight #E31B23), Roboto / Roboto Condensed. Plain text wordmark and an original icon.
 
 **PWA:** manifest, 192/512/maskable icons, Apple touch icon, service worker (app shell only, never caches API data), standalone display.
 
