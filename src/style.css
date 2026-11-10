@@ -1,5 +1,4 @@
-/* FitCode Nutrition (demo) — dark gym look with the client's site reds.
-   Reds sampled from fitcodebootcamp.com (button text ≈ #BC141C, logo fist ≈ #EC1824). */
+/* Gym Nutrition (demo): dark gym look with a red accent. */
 :root {
   --bg: #111113;
   --surface: #1b1b1e;
@@ -31,7 +30,7 @@ a { color: var(--text); }
 }
 .shell.no-tabs { padding-bottom: 32px; }
 
-/* Header + wordmark (plain text, not the FitCode logo) */
+/* Header + wordmark (plain text) */
 .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0 16px; }
 .wordmark { font-family: var(--font-head); font-weight: 800; text-transform: uppercase; letter-spacing: .02em; font-size: 20px; line-height: 1; }
 .wordmark span { color: var(--accent); }

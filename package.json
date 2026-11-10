@@ -1,9 +1,9 @@
 {
-  "name": "fitcode-nutrition-demo",
+  "name": "gym-nutrition-pwa",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Pilot demo of the FitCode member nutrition app (Supabase + Vercel PWA). Built by MCSP Consulting. Not an official FitCode app.",
+  "description": "Pilot demo of a gym member nutrition app (Supabase + Vercel PWA). Built by MCSP Consulting.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
